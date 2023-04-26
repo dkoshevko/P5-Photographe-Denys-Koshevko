@@ -120,12 +120,6 @@
       $(`#${lightboxId}`).modal("toggle");
     },
     prevImage() {
-      let activeImage = null;
-      $("img.gallery-item").each(function() {
-        if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
-          activeImage = $(this);
-        }
-      });
       let activeTag = $(".tags-bar span.active-tag").data("images-toggle");
       let imagesCollection = [];
       if (activeTag === "all") {
@@ -145,26 +139,17 @@
           }
         });
       }
-      let index = 0,
-        next = null;
-
-      $(imagesCollection).each(function(i) {
-        if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i ;
-        }
-      });
-      next =
-        imagesCollection[index] ||
-        imagesCollection[imagesCollection.length - 1];
+      let activeImage = $(".lightboxImage").attr("src");
+      let index = imagesCollection.findIndex(
+        (img) => $(img).attr("src") === activeImage
+      );
+      let next =
+        index === -1
+          ? imagesCollection[0]
+          : imagesCollection[(index + imagesCollection.length - 1) % imagesCollection.length];
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     nextImage() {
-      let activeImage = null;
-      $("img.gallery-item").each(function() {
-        if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
-          activeImage = $(this);
-        }
-      });
       let activeTag = $(".tags-bar span.active-tag").data("images-toggle");
       let imagesCollection = [];
       if (activeTag === "all") {
@@ -184,15 +169,14 @@
           }
         });
       }
-      let index = 0,
-        next = null;
-
-      $(imagesCollection).each(function(i) {
-        if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i;
-        }
-      });
-      next = imagesCollection[index] || imagesCollection[0];
+      let activeImage = $(".lightboxImage").attr("src");
+      let index = imagesCollection.findIndex(
+        (img) => $(img).attr("src") === activeImage
+      );
+      let next =
+        index === -1
+          ? imagesCollection[0]
+          : imagesCollection[(index + 1) % imagesCollection.length];
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
