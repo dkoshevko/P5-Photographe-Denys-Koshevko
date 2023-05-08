@@ -21,7 +21,13 @@ body {
 .top-header .name {
 	font-size: 26px;
 }
-
+h1 a{
+	text-decoration: none;
+	color: #000;
+}
+h1 a:hover{
+	color: #000;
+}
 .nav ul {
 	display: flex;
 	list-style-type: none;
@@ -139,7 +145,13 @@ body {
 	display: flex;
 	font-size: 24px;
 }
-
+.modal-dialog{
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	height: 100vh;
+}
 .quote {
 	font-family: 'Spectral';
 	font-style: italic;
@@ -355,6 +367,18 @@ input[type="submit"] {
 	}
 	.picture {
 		width: 80%;
+	}
+	.picture img {
+		width: 240px;
+		height: 240px;
+	}
+	.gallery-item {
+		width: 375px;
+		height: 375px;
+		padding: .5em;
+	}
+	.modal-dialog{
+		margin: 1rem;
 	}
 }
 
